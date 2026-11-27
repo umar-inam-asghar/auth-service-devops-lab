@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Star Dust | Space Explorer dApp</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/ethers@6.13.2/dist/ethers.umd.min.js"></script>
+</head>
+<body>
+  <!-- Animated background -->
+  <div id="starfield" aria-hidden="true"></div>
+  <div class="planet planet-1" aria-hidden="true"></div>
+  <div class="planet planet-2" aria-hidden="true"></div>
+  <div class="rocket" aria-hidden="true">🚀</div>
+
+  <div class="app">
+    <!-- Header -->
+    <header class="topbar">
+      <div class="brand">
+        <span class="brand-icon">✨</span>
+        <div>
+          <h1>Star Dust</h1>
+          <p class="tagline">Space Explorer dApp</p>
+        </div>
+      </div>
+      <div class="wallet">
+        <span id="networkBadge" class="badge badge-off">Not connected</span>
+        <span id="walletAddress" class="address hidden"></span>
+        <button id="connectBtn" class="btn btn-primary">Connect Wallet</button>
+      </div>
+    </header>
+
+    <!-- Setup warning (shown if contract address not set) -->
+    <div id="configBanner" class="banner hidden">
+      ⚠️ Contract address not set. Open <code>frontend/script.js</code> and paste your deployed
+      Sepolia address into <code>CONTRACT_ADDRESS</code>.
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+      <h2>Mission Control</h2>
+      <p>Claim Star Dust daily, send it across the galaxy, and burn it to earn your rank.</p>
+    </section>
+
+    <!-- Stats -->
+    <section class="grid stats">
+      <div class="card stat">
+        <span class="stat-label">Your Balance</span>
+        <span class="stat-value"><span id="balance">—</span> <small>STAR</small></span>
+      </div>
+      <div class="card stat">
+        <span class="stat-label">Explorer Rank</span>
+        <span class="stat-value"><span id="rankIcon">🧑‍🚀</span> <span id="rankName">—</span></span>
+      </div>
+      <div class="card stat">
+        <span class="stat-label">Total Burned</span>
+        <span class="stat-value"><span id="burned">—</span> <small>STAR</small></span>
+      </div>
+    </section>
+
+    <!-- Rank progress -->
+    <section class="card progress-card">
+      <div class="progress-head">
+        <span>Progress to next rank</span>
+        <span id="progressText">Connect your wallet</span>
+      </div>
+      <div class="progress"><div id="progressFill" class="progress-fill"></div></div>
+      <div id="ladder" class="ladder"></div>
+    </section>
+
+    <!-- Actions -->
+    <section class="grid actions">
+      <!-- Claim -->
+      <div class="card action">
+        <h3>🎁 Daily Claim</h3>
+        <p class="muted">Collect 100 STAR every 24 hours.</p>
+        <button id="claimBtn" class="btn btn-glow" disabled>Claim 100 STAR</button>
+        <p id="claimTimer" class="timer">Connect wallet to claim</p>
+      </div>
+
+      <!-- Transfer -->
+      <div class="card action">
+        <h3>📤 Transfer</h3>
+        <p class="muted">Send Star Dust to another explorer.</p>
+        <input id="transferTo" type="text" placeholder="Recipient address (0x...)" autocomplete="off" />
+        <input id="transferAmount" type="number" min="0" step="any" placeholder="Amount of STAR" />
+        <button id="transferBtn" class="btn btn-glow" disabled>Send</button>
+      </div>
+
+      <!-- Burn -->
+      <div class="card action">
+        <h3>🔥 Burn to Upgrade</h3>
+        <p class="muted">Burn STAR permanently to rank up.</p>
+        <input id="burnAmount" type="number" min="0" step="any" placeholder="Amount of STAR to burn" />
+        <button id="burnBtn" class="btn btn-danger" disabled>Burn</button>
+      </div>
+    </section>
+
+    <!-- Status -->
+    <div id="status" class="status hidden" role="status" aria-live="polite">
+      <span id="statusText"></span>
+      <a id="statusLink" class="hidden" target="_blank" rel="noopener noreferrer">View on Etherscan ↗</a>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>
+        Contract:
+        <a id="contractLink" class="hidden" target="_blank" rel="noopener noreferrer"></a>
+        <span id="contractNone">not configured</span>
+      </p>
+      <p class="muted">Sepolia testnet only · Built by Umar Inam Asghar</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
